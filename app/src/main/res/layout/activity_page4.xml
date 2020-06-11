@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page4Activity">
+
+    <ImageView
+        android:id="@+id/imvtop"
+        android:layout_width="415dp"
+        android:layout_height="98dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parenttop" />
+
+    <ImageView
+        android:id="@+id/imv01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toTopOf="@+id/imv02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parent01" />
+
+    <ImageView
+        android:id="@+id/imv02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toTopOf="@+id/imv03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv01"
+        app:srcCompat="@drawable/parent02" />
+
+    <ImageView
+        android:id="@+id/imv03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imv02"
+        app:srcCompat="@drawable/account" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="284dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="16dp"
+        android:background="#66ffffff"
+        android:text="定\t\t位\t\t查\t\t詢"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imv01"
+        app:layout_constraintEnd_toEndOf="@+id/imv01"
+        app:layout_constraintStart_toStartOf="@+id/imv01"
+        app:layout_constraintTop_toTopOf="@+id/imv01"
+        app:layout_constraintVertical_bias="0.117" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="284dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="16dp"
+        android:background="#66ffffff"
+        android:text="歷\t\t史\t\t足\t\t跡"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imv02"
+        app:layout_constraintEnd_toEndOf="@+id/imv02"
+        app:layout_constraintStart_toStartOf="@+id/imv02"
+        app:layout_constraintTop_toTopOf="@+id/imv02"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="284dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="16dp"
+        android:background="#66ffffff"
+        android:text="我\t\t的\t\t帳\t\t戶"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imv03"
+        app:layout_constraintEnd_toEndOf="@+id/imv03"
+        app:layout_constraintStart_toStartOf="@+id/imv03"
+        app:layout_constraintTop_toTopOf="@+id/imv03"
+        app:layout_constraintVertical_bias="1.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
