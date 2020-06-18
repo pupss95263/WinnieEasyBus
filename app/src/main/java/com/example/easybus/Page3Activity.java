@@ -53,7 +53,7 @@ public class Page3Activity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it4 = new Intent(Page3Activity.this,Page8Activity.class);
+                Intent it4 = new Intent(Page3Activity.this,Login.class);
                 startActivity(it4);
             }
         });

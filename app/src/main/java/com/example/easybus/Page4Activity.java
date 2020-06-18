@@ -3,7 +3,10 @@ package com.example.easybus;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class Page4Activity extends AppCompatActivity {
 
@@ -14,6 +17,24 @@ public class Page4Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+        //跳頁到定位查詢
+        Button btn1 = (Button)findViewById(R.id.btn1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it1 = new Intent(Page4Activity.this,Page9Activity.class);
+                startActivity(it1);
+            }
+        });
+        //跳頁到歷史足跡
+        Button btn2 = (Button)findViewById(R.id.btn2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it2 = new Intent(Page4Activity.this,Page10Activity.class);
+                startActivity(it2);
+            }
+        });
 
     }
 }
