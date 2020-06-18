@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page702Activity">
+
+    <ImageButton
+        android:id="@+id/ib1"
+        android:layout_width="294dp"
+        android:layout_height="113dp"
+        android:background="@drawable/search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ib2"/>
+
+    <TextView
+        android:id="@+id/txv1"
+        android:layout_width="213dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="直接站外面一點"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ib1"
+        app:layout_constraintEnd_toEndOf="@+id/ib1"
+        app:layout_constraintStart_toStartOf="@id/ib1"
+        app:layout_constraintTop_toTopOf="@+id/ib1" />
+
+    <ImageButton
+        android:id="@+id/ib2"
+        android:layout_width="294dp"
+        android:layout_height="113dp"
+        android:background="@drawable/search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/txv2"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="不行!要站在線內"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ib2"
+        app:layout_constraintEnd_toEndOf="@+id/ib2"
+        app:layout_constraintStart_toStartOf="@id/ib2"
+        app:layout_constraintTop_toTopOf="@+id/ib2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

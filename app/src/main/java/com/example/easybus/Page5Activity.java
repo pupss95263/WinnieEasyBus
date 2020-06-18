@@ -26,7 +26,7 @@ public class Page5Activity extends AppCompatActivity {
 
         des = (EditText)findViewById(R.id.edt2);
         //產生新路線跳頁到google map
-        ImageButton btn1 = (ImageButton)findViewById(R.id.imb1);
+        ImageButton btn1 = (ImageButton)findViewById(R.id.search);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +47,15 @@ public class Page5Activity extends AppCompatActivity {
                 startActivity(call);
             }
         });
-
+        //跳頁回主頁
+        ImageButton btn2 = (ImageButton)findViewById(R.id.back);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it1 = new Intent(Page5Activity.this,Page3Activity.class);
+                startActivity(it1);
+            }
+        });
 
     }
 }

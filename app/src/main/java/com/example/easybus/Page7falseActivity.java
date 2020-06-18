@@ -7,23 +7,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-public class Page10Activity extends AppCompatActivity {
+public class Page7falseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page10);
+        setContentView(R.layout.activity_page7false);
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        //跳頁回家長主頁
-        ImageButton back = (ImageButton)findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
+
+        Button btn = (Button)findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it1 = new Intent(Page10Activity.this,Page4Activity.class);
+                Intent it1 = new Intent(Page7falseActivity.this,Page7Activity.class);
                 startActivity(it1);
             }
         });

@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/parenttop" />
+        app:srcCompat="@drawable/childrentop" />
 
     <ImageView
         android:id="@+id/imv01"
@@ -49,7 +49,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imv02"
-        app:srcCompat="@drawable/account01" />
+        app:srcCompat="@drawable/pparent" />
 
     <Button
         android:id="@+id/btn1"
@@ -91,5 +91,25 @@
         app:layout_constraintEnd_toEndOf="@+id/imv03"
         app:layout_constraintStart_toStartOf="@+id/imv03"
         app:layout_constraintTop_toTopOf="@+id/imv03"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:id="@+id/easybus"
+        android:layout_width="182dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center_vertical"
+        android:shadowColor="#bebebe"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="1"
+        android:text="Easy Bus"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imvtop"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
