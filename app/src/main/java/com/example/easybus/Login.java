@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
         mProgressBar=findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
 
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override

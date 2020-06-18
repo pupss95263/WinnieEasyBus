@@ -38,6 +38,7 @@ public class Register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
         mProgressBar=findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
 
         if(fAuth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(), Page8Activity.class));
