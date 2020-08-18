@@ -23,7 +23,7 @@ public class Page701Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        //跳選擇頁夜市
+        //跳選擇頁
 
         //播放video
         VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
