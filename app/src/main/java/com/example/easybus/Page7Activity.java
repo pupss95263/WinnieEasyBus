@@ -33,6 +33,7 @@ public class Page7Activity extends AppCompatActivity {
                 startActivity(call);
             }
         });
+
         ImageButton back = (ImageButton)findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,7 @@ public class Page7Activity extends AppCompatActivity {
                 startActivity(back);
             }
         });
+
         //情境一
         ImageButton ib1 = (ImageButton)findViewById(R.id.ib1);
         ib1.setOnClickListener(new View.OnClickListener() {

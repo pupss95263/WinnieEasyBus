@@ -21,7 +21,7 @@
         <activity android:name=".Page7falseActivity"></activity>
         <activity android:name=".Page7trueActivity" />
         <activity android:name=".Page702Activity" />
-        <activity android:name=".Page701Activity" />
+        <activity android:name=".Page701Activity"/>
         <activity android:name=".Login" />
         <activity android:name=".Register" />
         <activity android:name=".Page10Activity" />

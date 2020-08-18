@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Page10Activity">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="370dp"
-        android:layout_height="346dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/top"
@@ -73,5 +65,60 @@
         app:layout_constraintEnd_toEndOf="@+id/iv1"
         app:layout_constraintStart_toEndOf="@+id/iv2"
         app:layout_constraintTop_toTopOf="@+id/iv1" />
+
+    <ScrollView
+        android:layout_width="324dp"
+        android:layout_height="487dp"
+        android:background="@drawable/shape_round"
+        android:fillViewport="true"
+        android:radius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top"
+        app:layout_constraintVertical_bias="0.483">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.easybus.calendar
+                android:id="@+id/cal"
+                android:layout_width="match_parent"
+                android:layout_height="301dp"
+
+                app:mCurrentBg="#6E6E6E"
+                app:mCurrentBgDashPath="@array/calendar_currentDay_bg_DashPath"
+                app:mCurrentBgStrokeWidth="1.5dip"
+
+                app:mLineSpac="12dip"
+                app:mMonthRowL="@drawable/custom_calendar_row_left"
+                app:mMonthRowR="@drawable/custom_calendar_row_right"
+                app:mMonthRowSpac="50dip"
+
+                app:mMonthSpac="10dip"
+                app:mSelectBg="#ff0000"
+                app:mSelectRadius="15dip"
+                app:mSelectTextColor="#ffffff"
+                app:mSelectWeekTextColor="#ff0000"
+                app:mTextColorDay="#000000"
+                app:mTextColorMonth="#000000"
+                app:mTextColorPreFinish="#fc7451"
+                app:mTextColorYear="#000000"
+
+                app:mTextColorPreNull="#cecdcd"
+                app:mTextColorPreUnFinish="#60ba8d"
+                app:mTextColorWeek="#000000"
+
+                app:mTextSizeYear="70sp"
+                app:mTextSizeDay="17sp"
+                app:mTextSizeMonth="70sp"
+                app:mTextSizePre="10sp"
+                app:mTextSizeWeek="17sp"
+                app:mTextSpac="8dip" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

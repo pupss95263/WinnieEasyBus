@@ -4,9 +4,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 public class Page701Activity extends AppCompatActivity {
 
@@ -18,13 +24,28 @@ public class Page701Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         //跳選擇頁
-        Button btn = (Button)findViewById(R.id.btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        //播放video
+        VideoView videoView = (VideoView)this.findViewById(R.id.videoView);
+        MediaController mc = new MediaController(this);
+        videoView.setMediaController(mc);
+
+        videoView.setVideoURI(Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.one));
+        videoView.requestFocus();
+        videoView.start();
+        long duration = videoView.getDuration();
+
+        //影片播放時發生錯誤時觸發的方法
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
-            public void onClick(View v) {
-                Intent it1 = new Intent(Page701Activity.this,Page702Activity.class);
-                startActivity(it1);
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.i("通知","播放中出現錯誤");
+                return false;
             }
         });
+
+
     }
+
+
 }
