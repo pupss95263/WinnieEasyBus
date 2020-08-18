@@ -22,7 +22,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button btn1 = (Button)findViewById(R.id.btn1);
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
