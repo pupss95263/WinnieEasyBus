@@ -18,7 +18,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Page7falseActivity"></activity>
+        <activity android:name=".Page801Activity"></activity>
+        <activity android:name=".Main801Activity" />
+        <activity android:name=".Page7falseActivity" />
         <activity android:name=".Page7trueActivity" />
         <activity android:name=".Page702Activity" />
         <activity android:name=".Page701Activity"/>

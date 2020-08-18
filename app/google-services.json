@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "811267397605",
-    "firebase_url": "https://easybus-5a880.firebaseio.com",
-    "project_id": "easybus-5a880",
-    "storage_bucket": "easybus-5a880.appspot.com"
+    "project_number": "1040335507964",
+    "firebase_url": "https://easybus-b87b4.firebaseio.com",
+    "project_id": "easybus-b87b4",
+    "storage_bucket": "easybus-b87b4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:811267397605:android:c3c5b94dd8ad67e3c2410c",
+        "mobilesdk_app_id": "1:1040335507964:android:cc51a190ba1af0a1cca279",
         "android_client_info": {
           "package_name": "com.example.easybus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "811267397605-t3h447k198dbqfpi5mnl77c6rri188lg.apps.googleusercontent.com",
+          "client_id": "1040335507964-nr9bntdabh4p1u4fu3feff79gchul2h2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.easybus",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "811267397605-d7tef212k7ed412l8tqedttc5f4u4a4q.apps.googleusercontent.com",
+          "client_id": "1040335507964-tfge7338eb49opjqm1l42rkh6kgjcmfu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_La8-d0g-XquSSgSaw_YAgqdybo0q0V0"
+          "current_key": "AIzaSyCvmijZdVudLg--N1VMmsAVaihT2C8t9R0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "811267397605-d7tef212k7ed412l8tqedttc5f4u4a4q.apps.googleusercontent.com",
+              "client_id": "1040335507964-tfge7338eb49opjqm1l42rkh6kgjcmfu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
