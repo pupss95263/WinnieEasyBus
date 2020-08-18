@@ -14,7 +14,7 @@ public class Page801Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page801);
 
-        //隱藏title bar//
+        //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
