@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Register extends AppCompatActivity {
@@ -25,8 +28,11 @@ public class Register extends AppCompatActivity {
     TextView mRegistertext;
     Button mReg;
     ProgressBar mProgressBar;
+
     FirebaseAuth fAuth;
-    FirebaseDatabase myDataBase;
+    DatabaseReference mRef;
+    FirebaseDatabase mDataBase;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +48,19 @@ public class Register extends AppCompatActivity {
         mRegistertext=findViewById(R.id.Registertext);
         mReg=findViewById(R.id.RegisterBtn);
 
-        fAuth=FirebaseAuth.getInstance();
-        myDataBase=FirebaseDatabase.getInstance();
         mProgressBar=findViewById(R.id.progressBar);
 
         mProgressBar.setVisibility(View.GONE);
 
-        if(fAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(), Page8Activity.class));
-            finish();
-        }
+        mDataBase=FirebaseDatabase.getInstance();
+        mRef=mDataBase.getReference("Users");
+        fAuth=FirebaseAuth.getInstance();
 
         mReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email=mEmail.getText().toString().trim();
                 String password=mPassword.getText().toString().trim();
-                String fullName=mFullname.getText().toString();
-
-                final StoreFirebase storefirebase=new StoreFirebase(email,password,fullName);
 
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("請輸入電子信箱");
@@ -76,29 +76,42 @@ public class Register extends AppCompatActivity {
                 }
                 mProgressBar.setVisibility(View.VISIBLE);
 
+                String fullName=mFullname.getText().toString();
+                user=new User(email, password, fullName);
+                RegisterUser(email,password);
+            }
+
+            private void RegisterUser(String email, String password) {
                 //使用者註冊
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(Register.this,"註冊成功", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), Login.class));
-                            //存資料到FIREBASE
-                            myDataBase.getReference().child(fAuth.getUid()).setValue(storefirebase);
+                            FirebaseUser user= fAuth.getCurrentUser();
+                            updateUI(user);
                         }else{
                             Toast.makeText(Register.this,"註冊失敗"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             mProgressBar.setVisibility(View.GONE);
                         }
                     }
+
+                    private void updateUI(FirebaseUser currentUser) {
+                        String keyID=mRef.push().getKey();
+                        mRef.child(keyID).setValue(user);
+                        startActivity(new Intent(getApplicationContext(), Login.class));
+                    }
                 });
             }
         });
-
+        
         mRegistertext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),Login.class));
+
             }
         });
     }
 }
+

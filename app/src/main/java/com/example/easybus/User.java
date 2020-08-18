@@ -1,11 +1,11 @@
 package com.example.easybus;
 
-public class StoreFirebase {
+public class User {
     String email;
     String password;
     String fullName;
 
-    public StoreFirebase(String email, String password, String fullName) {
+    public User(String email, String password, String fullName) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;

@@ -3,7 +3,9 @@ package com.example.easybus;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class Page801Activity extends AppCompatActivity {
 
@@ -15,6 +17,7 @@ public class Page801Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
 
     }
 }
