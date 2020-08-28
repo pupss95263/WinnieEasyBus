@@ -1,10 +1,13 @@
 package com.example.easybus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,8 +18,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_FINE_LOCATION_PERMISSION = 102;
+
+    String[] permissionsArray=new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE};
+    List<String> permissionsList=new ArrayList<>();
+    private static final int REQUEST_CODE_ASK_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,42 +47,39 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        //定位
-        CheckPermission();
+        //定位權限
+        checkRequiredPermission(this);
     }
 
-    private void CheckPermission() {
-        //如果使用者尚未允許權限
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // 如果裝置版本是6.0（包含）以上
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                // 請求授權：第一個參數是請求授權的名稱，第二個參數是請求代碼
-                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION_PERMISSION);
+    private void checkRequiredPermission(Activity activity) {
+        for (String permission : permissionsArray) {
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permission);
             }
+        }
+        if (permissionsList.size()>0) {
+            ActivityCompat.requestPermissions(activity, permissionsList.toArray(new String[permissionsList.size()]), REQUEST_CODE_ASK_PERMISSION);
         }
     }
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // 用 requestCode 來判斷這是哪一個權限
-        if (requestCode == REQUEST_FINE_LOCATION_PERMISSION) {
-            //如果使用者拒絕權限
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-                    Toast.makeText(this, "請設定允許位置資訊授權，才能定位", Toast.LENGTH_LONG).show();
-                    Intent it = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                    Uri u = Uri.fromParts("package", getPackageName(), null);
-                    it.setData(u);
-                    startActivity(it);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSION:
+                for (int i=0; i<permissions.length; i++) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(MainActivity.this, "!!!!!!"+permissions[i], Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "本App需允許授權，才能 "+permissions[i], Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri u = Uri.fromParts("package", getPackageName(), null);
+                        it.setData(u);
+                        startActivity(it);
+                    }
                 }
-                else{
-                    Toast.makeText(this, "本App需允許位置授權，才能定位", Toast.LENGTH_LONG).show();
-                }
-                finish();
-            }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
-
 }

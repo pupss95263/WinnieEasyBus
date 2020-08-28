@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".AddFamMember">
 
     <View
@@ -51,6 +52,16 @@
         app:layout_constraintVertical_bias="0.588"
         app:srcCompat="@drawable/addicon" />
 
+    <Button
+        android:id="@+id/accept"
+        android:layout_width="414dp"
+        android:layout_height="67dp"
+        android:background="@drawable/accept"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top"
+        app:layout_constraintVertical_bias="0.657" />
+
     <TextView
         android:id="@+id/txvtop"
         android:layout_width="142dp"
@@ -66,13 +77,23 @@
         app:layout_constraintTop_toTopOf="@+id/iv1"
         app:layout_constraintVertical_bias="0.631" />
 
-    <ImageView
-        android:id="@+id/accept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="414dp"
+        android:layout_height="77dp"
+        android:background="@drawable/form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintVertical_bias="0.811"
-        app:srcCompat="@drawable/accept"
+        app:layout_constraintVertical_bias="0.243"
         tools:layout_editor_absoluteX="-3dp" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="414dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="204dp"
+        android:background="@drawable/form"
+        app:layout_constraintTop_toBottomOf="@+id/top"
+        tools:layout_editor_absoluteX="-3dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

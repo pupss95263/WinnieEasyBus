@@ -1,20 +1,19 @@
 package com.example.easybus;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 public class Page8Activity extends AppCompatActivity {
+    //SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
     TextView mEnteredName;
+    ImageView mPforfilepic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +25,26 @@ public class Page8Activity extends AppCompatActivity {
         actionBar.hide();
 
         mEnteredName=findViewById(R.id.EnteredName);
+        mPforfilepic=findViewById(R.id.profilepic);
+
+        /*
+        mPforfilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //實例化SelectPicPopupWindow
+                menuWindow=new SelectPicPopupWindow(Page8Activity.this,itemsOnClick);
+                //設計彈出框
+                menuWindow.showAtLocation(Page8Activity.this.findViewById(R.id.profilepic), Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+            }
+        });
+
+        private OnClickListener itemsOnClick=new OnClickListener(){
+
+        };
+        */
+
+    }
+}
 
        /* FirebaseDatabase database=FirebaseDatabase.getInstance();//連結資料庫
         DatabaseReference databaseReference=database.getReference("Users").child("fullName");//連結資料(名稱:Users)
@@ -43,6 +62,3 @@ public class Page8Activity extends AppCompatActivity {
 
             }
         }); */
-
-    }
-}
