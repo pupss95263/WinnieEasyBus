@@ -7,11 +7,12 @@
     android:background="#DDDDDD"
     tools:context=".Page8Activity">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilepic"
         android:layout_width="197dp"
         android:layout_height="163dp"
         android:clickable="true"
+        android:src="@drawable/profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,14 +2,19 @@ package com.example.easybus;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -27,17 +33,21 @@ import androidx.core.content.FileProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
 
     TextView mEnteredName;
 
-    public static final int TAKE_PHOTO = 1;
-    //public static final int SELECT_PHOTO=2;
+    public static final int SELECT_PHOTO=1;
+    public static final int TAKE_PHOTO = 3;
     private Uri imageUri;
     private Context mContext;
-    ImageView mPforfilepic;
+    CircleImageView mPforfilepic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +84,7 @@ public class Page8Activity extends AppCompatActivity {
                     break;
                 //相簿選擇相片
                 case R.id.SelectPhotoBtn:
-                    //selectPhoto();
+                    openAlbum();
                     break;
                 case R.id.cancelBtn:
                     break;
@@ -84,9 +94,22 @@ public class Page8Activity extends AppCompatActivity {
         }
     };
 
+    private void openAlbum() {
+        Intent in=new Intent();
+        in.setType("image/*");
+        in.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(in,SELECT_PHOTO);
+    }
+
     public void takePhoto() {
-        //創新File,保存鏡頭拍的照片,並將它存在SD卡
-        File outputImage = new File(getExternalCacheDir(), "output_image.jpg");
+        //時間命名圖片的名稱
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+
+        //儲存至DCIM資料夾
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        File outputImage = new File(path,filename+".jpg");
 
         //照片更換
         try {
@@ -117,44 +140,42 @@ public class Page8Activity extends AppCompatActivity {
     }
 
     private void startCamera(){
-        Intent intent=new Intent("android.media.action.IMAGE_CAPTURE");
         //指定圖片輸出地址為imageUri
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-        startActivityForResult(intent,TAKE_PHOTO);
+        Intent intent=new Intent("android.media.action.IMAGE_CAPTURE"); //照相
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri); //指定圖片地址
+        startActivityForResult(intent,TAKE_PHOTO); //啟動相機
+        //拍完照startActivityForResult() 结果返回onActivityResult()函数
     }
 
     // 使用startActivityForResult()方法開啟Intent的回調
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         switch(requestCode){
             case TAKE_PHOTO:
-                if (requestCode==RESULT_OK){
-                    try{
-                        //將圖片解析成bitmap對象
-                        Bitmap bitmap= BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-                        //將圖片顯示出來
-                        mPforfilepic.setImageBitmap(bitmap);
-                    }catch(FileNotFoundException e){
-                        e.printStackTrace();
-                    }
+                try{
+                    //將圖片解析成bitmap對象
+                    Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                    //將圖片顯示出來
+                    mPforfilepic.setImageBitmap(bitmap);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
                 }
                 break;
+
+            case SELECT_PHOTO:
+                Uri uri=data.getData();
+                ContentResolver cr = this.getContentResolver();
+                try {
+                    //获取图片
+                    Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                    mPforfilepic.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+
             default:
                 break;
         }
     }
-
-    public void onRequestPermissionResult(int requestCode,@Nullable String[] permissions, @Nullable int[] grantResults){
-        switch(requestCode){
-            case 100:
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    //啟用相機程序
-                    startCamera();
-                }else{
-                    Toast.makeText(mContext,"沒有權限",Toast.LENGTH_SHORT).show();
-                }
-                break;
-            default:
-        }
-    }
-
 }
