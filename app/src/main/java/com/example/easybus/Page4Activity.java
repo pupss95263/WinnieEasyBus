@@ -35,6 +35,15 @@ public class Page4Activity extends AppCompatActivity {
                 startActivity(it2);
             }
         });
+        //跳頁到我的帳戶
+        Button btn3 = (Button)findViewById(R.id.btn3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it3 = new Intent(Page4Activity.this,Page8Activity.class);
+                startActivity(it3);
+            }
+        });
 
     }
 }

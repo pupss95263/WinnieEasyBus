@@ -4,11 +4,16 @@ public class User {
     String email;
     String password;
     String fullName;
+    String imageURL;
 
-    public User(String email, String password, String fullName) {
+    public User() {
+    }
+
+    public User(String email, String password, String fullName,String imageURL) {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
+        this.imageURL = imageURL;
     }
 
     public String getEmail() {
@@ -34,4 +39,8 @@ public class User {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public String getImageURL() { return imageURL; }
+
+    public void setImageURL(String imageURL) { this.imageURL = imageURL; }
 }

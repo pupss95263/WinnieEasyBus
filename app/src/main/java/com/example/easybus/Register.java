@@ -23,6 +23,8 @@ import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class Register extends AppCompatActivity {
     EditText mFullname, mPassword, mEmail;
     TextView mRegistertext;
@@ -31,16 +33,16 @@ public class Register extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     DatabaseReference mRef;
-    FirebaseDatabase mDataBase;
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //隱藏title bar
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        fAuth=FirebaseAuth.getInstance();
 
         mFullname=findViewById(R.id.fullname);
         mPassword=findViewById(R.id.password);
@@ -49,18 +51,14 @@ public class Register extends AppCompatActivity {
         mReg=findViewById(R.id.RegisterBtn);
 
         mProgressBar=findViewById(R.id.progressBar);
-
         mProgressBar.setVisibility(View.GONE);
-
-        mDataBase=FirebaseDatabase.getInstance();
-        mRef=mDataBase.getReference("Users");
-        fAuth=FirebaseAuth.getInstance();
 
         mReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email=mEmail.getText().toString().trim();
                 String password=mPassword.getText().toString().trim();
+                String fullName=mFullname.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("請輸入電子信箱");
@@ -74,37 +72,61 @@ public class Register extends AppCompatActivity {
                     mPassword.setError("密碼至少要6位數");
                     return;
                 }
-                mProgressBar.setVisibility(View.VISIBLE);
-
-                String fullName=mFullname.getText().toString();
-                user=new User(email, password, fullName);
-                RegisterUser(email,password);
+                if(TextUtils.isEmpty(fullName)){
+                    mFullname.setError("請輸入姓名");
+                    return;
+                }
+                else {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    RegisterUser(email, password, fullName); //多加fullName
+                }
             }
 
-            private void RegisterUser(String email, String password) {
+            private void RegisterUser(final String email, final String password , final String fullName) {
+
                 //使用者註冊
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(Register.this,"註冊成功", Toast.LENGTH_SHORT).show();
                             FirebaseUser user= fAuth.getCurrentUser();
-                            updateUI(user);
-                        }else{
-                            Toast.makeText(Register.this,"註冊失敗"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            mProgressBar.setVisibility(View.GONE);
-                        }
-                    }
+                            assert user != null;
+                            String uid = user.getUid();
+                            mRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+                            HashMap<String,String> hashMap = new HashMap<>();  //看不懂HashMap
+                            hashMap.put("fullName",fullName);
+                            hashMap.put("email",email);
+                            hashMap.put("password",password);
+                            hashMap.put("imageURL","default");
+                            mRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    mProgressBar.setVisibility(View.GONE);
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(Register.this,"註冊成功", Toast.LENGTH_SHORT).show(); //和影片不一樣
+                                        Intent intent = new Intent(Register.this,Login.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK); // 加得莫名其妙
+                                        startActivity(intent);
 
-                    private void updateUI(FirebaseUser currentUser) {
-                        String keyID=mRef.push().getKey();
-                        mRef.child(keyID).setValue(user);
-                        startActivity(new Intent(getApplicationContext(), Login.class));
+                                    }else{
+
+                                        Toast.makeText(Register.this,"註冊失敗"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                        mProgressBar.setVisibility(View.GONE);
+
+                                    }
+                                }
+                            });
+                            //updateUI(user);
+                        }else{
+                            mProgressBar.setVisibility(View.GONE);
+                            Toast.makeText(Register.this,"註冊失敗"+ task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 });
             }
         });
-        
+        //跳到註冊
         mRegistertext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,4 +136,3 @@ public class Register extends AppCompatActivity {
         });
     }
 }
-

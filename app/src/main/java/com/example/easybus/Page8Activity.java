@@ -3,18 +3,15 @@ package com.example.easybus;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
@@ -22,13 +19,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,13 +47,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
 
+    ImageView backBtn;
+    CircleImageView mPforfilepic;
+    FirebaseAuth fAuth;
+    FirebaseUser fUser;
+    DatabaseReference databaseReference;
     TextView mEnteredName;
 
     public static final int SELECT_PHOTO=1;
     public static final int TAKE_PHOTO = 3;
     private Uri imageUri;
     private Context mContext;
-    CircleImageView mPforfilepic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +68,41 @@ public class Page8Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        backBtn=findViewById(R.id.backicon);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
         mContext = Page8Activity.this;
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
+
+        //獲取username
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user =snapshot.getValue(User.class);
+                assert user != null;
+                mEnteredName.setText(user.getFullName());
+                if(user.getImageURL().equals("default")){
+                    mPforfilepic.setImageResource(R.drawable.profile);
+                }else{
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(mPforfilepic);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Page8Activity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //返回健(回需求者選單)
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Page3Activity.class));
+            }
+        });
 
         mPforfilepic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +207,7 @@ public class Page8Activity extends AppCompatActivity {
                 Uri uri=data.getData();
                 ContentResolver cr = this.getContentResolver();
                 try {
-                    //获取图片
+                    //獲取圖片
                     Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                     mPforfilepic.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
