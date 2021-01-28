@@ -89,7 +89,7 @@ public class Page8Activity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user =snapshot.getValue(User.class);
+                User user =snapshot.getValue(User.class); //magic 錯誤還跑得動!
                 assert user != null;
                 mEnteredName.setText(user.getFullName());
                 mEmail.setText(user.getEmail());
