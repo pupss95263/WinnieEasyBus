@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:src="@drawable/ic_priority_high_black_24dp"
+        app:srcCompat="@drawable/ic_priority_high_black_24dp"
         app:backgroundTint="#FD0318"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

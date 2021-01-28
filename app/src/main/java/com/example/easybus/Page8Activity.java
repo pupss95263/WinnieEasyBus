@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,12 +48,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Page8Activity extends AppCompatActivity {
     SelectPicPopupWindow menuWindow; //自訂義的彈出框類別(SelectPicPopupWindow)
 
+    Button mLogoutBtn;
     ImageView backBtn;
     CircleImageView mPforfilepic;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     DatabaseReference databaseReference;
-    TextView mEnteredName;
+    TextView mEnteredName,mEmail,mEMname,mEMphone;
 
     public static final int SELECT_PHOTO=1;
     public static final int TAKE_PHOTO = 3;
@@ -68,10 +70,17 @@ public class Page8Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        //FloatingActionButton.Floatingbtn();
+
         backBtn=findViewById(R.id.backicon);
+        mLogoutBtn=findViewById(R.id.LogoutBtn);
         mEnteredName = findViewById(R.id.EnteredName);
         mPforfilepic = findViewById(R.id.profilepic);
+        mEmail=findViewById(R.id.textView3);
+        mEMname=findViewById(R.id.textView2);
+        mEMphone=findViewById(R.id.textView5);
         mContext = Page8Activity.this;
+
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
@@ -83,6 +92,9 @@ public class Page8Activity extends AppCompatActivity {
                 User user =snapshot.getValue(User.class);
                 assert user != null;
                 mEnteredName.setText(user.getFullName());
+                mEmail.setText(user.getEmail());
+                mEMname.setText(user.getEmName());
+                mEMphone.setText(user.getEmPhone());
                 if(user.getImageURL().equals("default")){
                     mPforfilepic.setImageResource(R.drawable.profile);
                 }else{
@@ -101,6 +113,17 @@ public class Page8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),Page3Activity.class));
+            }
+        });
+
+        //登出
+        mLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fAuth.signOut();
+                Intent intent=new Intent(Page8Activity.this,Page3Activity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

@@ -18,6 +18,7 @@ public class Page2Activity extends AppCompatActivity {
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
         //孩童按鈕跳頁到page3
         ImageButton btn1 = (ImageButton) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +28,7 @@ public class Page2Activity extends AppCompatActivity {
                 startActivity(it1);
             }
         });
+
         //家長按鈕跳頁到page4
         ImageButton btn2 = (ImageButton) findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {

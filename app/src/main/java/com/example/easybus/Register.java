@@ -19,14 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
-    EditText mFullname, mPassword, mEmail;
+    EditText mFullname, mPassword, mEmail, mEMphone, mEMname;
     TextView mRegistertext;
     Button mReg;
     ProgressBar mProgressBar;
@@ -43,7 +42,8 @@ public class Register extends AppCompatActivity {
         actionBar.hide();
 
         fAuth=FirebaseAuth.getInstance();
-
+        mEMname=findViewById(R.id.EMname);
+        mEMphone=findViewById(R.id.EMphone);
         mFullname=findViewById(R.id.fullname);
         mPassword=findViewById(R.id.password);
         mEmail=findViewById(R.id.Email);
@@ -59,6 +59,8 @@ public class Register extends AppCompatActivity {
                 String email=mEmail.getText().toString().trim();
                 String password=mPassword.getText().toString().trim();
                 String fullName=mFullname.getText().toString().trim();
+                String emName=mEMname.getText().toString().trim();
+                String emPhone=mEMphone.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("請輸入電子信箱");
@@ -76,13 +78,21 @@ public class Register extends AppCompatActivity {
                     mFullname.setError("請輸入姓名");
                     return;
                 }
+                if(TextUtils.isEmpty(emName)){
+                    mEMname.setError("請輸入緊急連絡人姓名");
+                    return;
+                }
+                if(TextUtils.isEmpty(emPhone)){
+                    mEMphone.setError("請輸入緊急聯絡人電話");
+                    return;
+                }
                 else {
                     mProgressBar.setVisibility(View.VISIBLE);
-                    RegisterUser(email, password, fullName); //多加fullName
+                    RegisterUser(email, password, fullName, emName, emPhone); //多加fullName
                 }
             }
 
-            private void RegisterUser(final String email, final String password , final String fullName) {
+            private void RegisterUser(final String email, final String password , final String fullName, final String emName, final String emPhone) {
 
                 //使用者註冊
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -97,6 +107,8 @@ public class Register extends AppCompatActivity {
                             hashMap.put("fullName",fullName);
                             hashMap.put("email",email);
                             hashMap.put("password",password);
+                            hashMap.put("emName",emName);
+                            hashMap.put("emPhone",emPhone);
                             hashMap.put("imageURL","default");
                             mRef.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -126,6 +138,7 @@ public class Register extends AppCompatActivity {
                 });
             }
         });
+
         //跳到註冊
         mRegistertext.setOnClickListener(new View.OnClickListener() {
             @Override

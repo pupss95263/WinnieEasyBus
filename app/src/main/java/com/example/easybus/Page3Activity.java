@@ -14,13 +14,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class Page3Activity extends AppCompatActivity {
+    com.example.easybus.FloatingActionButton f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
+        
         //隱藏title bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
         //跳頁到新增路線
         Button btn1 = (Button)findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +33,7 @@ public class Page3Activity extends AppCompatActivity {
                 startActivity(it1);
             }
         });
+
         //跳頁到搭車
         Button btn2 = (Button)findViewById(R.id.btn2);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +43,7 @@ public class Page3Activity extends AppCompatActivity {
                 startActivity(it2);
             }
         });
+
         //跳頁到注意事項
         Button btn3 = (Button)findViewById(R.id.btn3);
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +53,7 @@ public class Page3Activity extends AppCompatActivity {
                 startActivity(it3);
             }
         });
+
         //跳頁到我的帳戶
         Button btn4 = (Button)findViewById(R.id.btn4);
         btn4.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +63,7 @@ public class Page3Activity extends AppCompatActivity {
                 startActivity(it4);
             }
         });
+
         //浮動按鈕撥打給緊急聯絡人
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +71,7 @@ public class Page3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Snackbar.make(v,"打電話給緊急連絡人",Snackbar.LENGTH_LONG).setAction("Action",null).show();
                 Intent call = new Intent(Intent.ACTION_DIAL);
-                Uri u = Uri.parse("tel:"+"0905017139");
+                Uri u = Uri.parse("tel:"+"0926666533");
                 call.setData(u);
                 startActivity(call);
             }
