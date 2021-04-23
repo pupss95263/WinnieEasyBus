@@ -100,7 +100,7 @@ public class Login2 extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }else{
-                                        //System.out.println(result);   ///
+                                        //System.out.println(result);   ///哈囉
                                         Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                                     }
                                 }
