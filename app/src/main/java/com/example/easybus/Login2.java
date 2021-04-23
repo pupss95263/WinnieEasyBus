@@ -33,7 +33,7 @@ public class Login2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
 
-        //隱藏title bar
+        //隱藏title bar///
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
         mPassword=findViewById(R.id.password);
