@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,17 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
     EditText mPassword, mEmail;
@@ -50,7 +40,7 @@ public class Login extends AppCompatActivity {
         mPassword=findViewById(R.id.password);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.registertext);
-        mLoginBtn=findViewById(R.id.RegisterBtn);
+        mLoginBtn=findViewById(R.id.forgotpassword);
         mForgetext=findViewById(R.id.Forgetext);
         backBtn=findViewById(R.id.back);
         fAuth=FirebaseAuth.getInstance();
@@ -70,7 +60,7 @@ public class Login extends AppCompatActivity {
                 String tex_email = mEmail.getText().toString().trim();
                 String tex_password = mPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(tex_email)){
+                if(TextUtils.isEmpty(  tex_email)){
                     mEmail.setError("請輸入電子信箱");
                     return;
                 }

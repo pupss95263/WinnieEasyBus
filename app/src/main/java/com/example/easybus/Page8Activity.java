@@ -2,6 +2,8 @@ package com.example.easybus;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +14,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +33,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,12 +43,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,12 +64,16 @@ public class Page8Activity extends AppCompatActivity {
     CircleImageView mPforfilepic;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
+    FirebaseStorage storage;
     DatabaseReference databaseReference;
+    StorageReference storageReference;
     TextView mEnteredName;
+    ProgressBar mProgressBar;
+
 
     public static final int SELECT_PHOTO=1;
     public static final int TAKE_PHOTO = 3;
-    private Uri imageUri;
+    public Uri imageUri;
     private Context mContext;
 
     @Override
@@ -74,8 +91,14 @@ public class Page8Activity extends AppCompatActivity {
         mContext = Page8Activity.this;
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
 
+        mProgressBar=findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.GONE);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(fUser.getUid());
+        //storageReference = FirebaseStorage.getInstance().getReference("Users");
         //獲取username
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -111,6 +134,7 @@ public class Page8Activity extends AppCompatActivity {
                 menuWindow = new SelectPicPopupWindow(Page8Activity.this, itemsOnClick);
                 //設計彈出框
                 menuWindow.showAtLocation(Page8Activity.this.findViewById(R.id.profilepic), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+
             }
         });
     }
@@ -191,6 +215,7 @@ public class Page8Activity extends AppCompatActivity {
 
     // 使用startActivityForResult()方法開啟Intent的回調
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
         switch(requestCode){
             case TAKE_PHOTO:
                 try{
@@ -219,5 +244,48 @@ public class Page8Activity extends AppCompatActivity {
             default:
                 break;
         }
+        if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            imageUri = data.getData();
+            mPforfilepic.setImageURI(imageUri);
+            uploadPicture();
+        }
+    }
+    //上傳使用者相片
+    private void uploadPicture() {
+
+        final ProgressDialog pd =new ProgressDialog(this); // progress 的訊息框
+        pd.setTitle("上傳中......");
+        pd.show();
+        mProgressBar.setVisibility(View.VISIBLE);
+
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference riversRef = storageReference.child("image/"+randomKey);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        mProgressBar.setVisibility(View.GONE);
+                        pd.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content),"上傳成功",Snackbar.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        mProgressBar.setVisibility(View.GONE);
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(),"上傳失敗",Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progressPercent = (100.00*taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                        pd.setMessage("已上傳: "+(int)progressPercent+"%");
+                    }
+                });
     }
 }

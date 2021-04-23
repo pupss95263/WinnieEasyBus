@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,59 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
-    <View
-        android:id="@+id/top"
-        android:layout_width="405dp"
-        android:layout_height="95dp"
-        android:background="@drawable/round_button"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="275dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/top"
-        app:layout_constraintEnd_toEndOf="@+id/top"
-        app:layout_constraintHorizontal_bias="0.688"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/top"
-        app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/page5up" />
-
-    <ImageView
-        android:id="@+id/iv2"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintStart_toStartOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.588"
-        app:srcCompat="@drawable/sdg" />
-
-    <TextView
-        android:id="@+id/txvtop"
-        android:layout_width="142dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:text="我的帳戶"
-        android:textColor="#000000"
-        android:textSize="33sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/iv1"
-        app:layout_constraintEnd_toEndOf="@+id/iv1"
-        app:layout_constraintTop_toTopOf="@+id/iv1"
-        app:layout_constraintVertical_bias="0.526" />
-
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/fullname"
         android:layout_width="333dp"
         android:layout_height="55dp"
         android:layout_marginTop="5dip"
@@ -72,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <EditText
         android:id="@+id/Email"
@@ -82,13 +32,15 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="請輸入信箱"
+        android:singleLine="true"
         android:inputType="textEmailAddress"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.321" />
+
 
     <EditText
         android:id="@+id/password"
@@ -105,10 +57,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554" />
+        app:layout_constraintVertical_bias="0.453" />
 
     <Button
-        android:id="@+id/forgotpassword"
+        android:id="@+id/register"
         android:layout_width="121dp"
         android:layout_height="48dp"
         android:background="@drawable/accountbtn"
@@ -117,33 +69,59 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/top"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.73" />
 
     <TextView
         android:id="@+id/Registertext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="328dp"
         android:text="登入"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.896"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Registertext"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
+
+    <RadioGroup
+        android:id="@+id/RadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59000003">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="需求者"
+            android:textSize="20dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="照顧者"
+            android:textSize="20dp" />
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,11 +43,11 @@ public class Register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
 
-        mFullname=findViewById(R.id.fullname);
+        mFullname=findViewById(R.id.username);
         mPassword=findViewById(R.id.password);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.Registertext);
-        mReg=findViewById(R.id.RegisterBtn);
+        mReg=findViewById(R.id.forgotpassword);
 
         mProgressBar=findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.GONE);
