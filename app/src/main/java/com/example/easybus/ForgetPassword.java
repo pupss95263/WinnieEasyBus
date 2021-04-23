@@ -46,7 +46,7 @@ public class ForgetPassword extends AppCompatActivity {
                 if(TextUtils.isEmpty(mEmail))
                     Toast.makeText(ForgetPassword.this, "輸入您的電子信箱", Toast.LENGTH_SHORT).show();
                 else{
-                    fAuth.sendPasswordResetEmail(mEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    fAuth.sendPasswordResetEmail(mEmail).addOnCompleteListener( new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){

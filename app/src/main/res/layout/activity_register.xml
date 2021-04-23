@@ -67,12 +67,12 @@
         android:ems="10"
         android:hint="請輸入姓名"
         android:inputType="textPersonName"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.19" />
 
     <EditText
         android:id="@+id/Email"
@@ -83,12 +83,29 @@
         android:ems="10"
         android:hint="請輸入信箱"
         android:inputType="textEmailAddress"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.304" />
+
+    <EditText
+        android:id="@+id/EMname"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dip"
+        android:drawableLeft="@drawable/person1"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請輸入緊急聯絡人稱謂"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
 
     <EditText
         android:id="@+id/password"
@@ -100,12 +117,28 @@
         android:ems="10"
         android:hint="請輸入密碼"
         android:inputType="textPassword"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554" />
+        app:layout_constraintVertical_bias="0.409" />
+
+    <EditText
+        android:id="@+id/EMphone"
+        android:layout_width="333dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="5dip"
+        android:drawableLeft="@drawable/phone1"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="請輸入緊急連絡人電話"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.637" />
 
     <Button
         android:id="@+id/forgotpassword"
@@ -118,7 +151,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/top"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintVertical_bias="0.786" />
 
     <TextView
         android:id="@+id/Registertext"
@@ -131,7 +164,7 @@
         app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.663" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -144,6 +177,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Registertext"
-        app:layout_constraintVertical_bias="0.694" />
+        app:layout_constraintVertical_bias="0.962" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
