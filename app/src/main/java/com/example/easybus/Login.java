@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         mPassword=findViewById(R.id.password);
         mEmail=findViewById(R.id.Email);
         mRegistertext=findViewById(R.id.registertext);
-        mLoginBtn=findViewById(R.id.forgotpassword);
+        mLoginBtn=findViewById(R.id.RegisterBtn);
         mForgetext=findViewById(R.id.Forgetext);
         backBtn=findViewById(R.id.back);
         fAuth=FirebaseAuth.getInstance();

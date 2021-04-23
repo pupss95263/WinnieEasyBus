@@ -37,7 +37,8 @@
         <activity android:name=".Page10Activity" />
         <activity android:name=".Page9Activity" />
         <activity android:name=".Page501Activity" />
-
+        <activity android:name=".Login2" />
+        <activity android:name=".SignUp2" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -61,6 +62,7 @@
         <activity android:name=".Page3Activity" />
         <activity android:name=".Page2Activity" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
