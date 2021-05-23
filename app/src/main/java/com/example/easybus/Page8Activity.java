@@ -143,7 +143,7 @@ public class Page8Activity extends AppCompatActivity {
     }
 
     private void readUser(){
-        String URL ="http://192.168.0.114/LoginRegister/fetch.php?email="+email;
+        String URL ="http://192.168.0.132/LoginRegister/fetch.php?email="+email;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,

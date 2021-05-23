@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void readUser(){
 
-        String URL ="http://192.168.0.114/LoginRegister/fetch.php?email="+email2;
+        String URL ="http://192.168.0.132/LoginRegister/fetch.php?email="+email2;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 URL,

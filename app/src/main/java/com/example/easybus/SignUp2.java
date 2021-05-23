@@ -70,7 +70,7 @@ public class SignUp2 extends AppCompatActivity {
             }
         });
 
-        url = "http://192.168.0.114/LoginRegister/signup.php";
+        url = "http://192.168.0.132/LoginRegister/signup.php";
         mReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

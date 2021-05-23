@@ -100,7 +100,7 @@ public class Login2 extends AppCompatActivity {
                     password2 = mPassword.getText().toString();
 
 
-
+                    //我塔拉很強
 
                     if (!email2.equals("") && !password2.equals("")) {
                         mProgressBar.setVisibility(View.VISIBLE);
@@ -116,7 +116,7 @@ public class Login2 extends AppCompatActivity {
                                 data[0] = email2;
                                 data[1] = password2;
 
-                                PutData putData = new PutData("http://192.168.0.114/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
+                                PutData putData = new PutData("http://192.168.0.132/LoginRegister/login.php", "POST", field, data);//小高電腦的IP
                                 if (putData.startPut()) {
                                     if (putData.onComplete()) {
                                         mProgressBar.setVisibility(View.GONE);

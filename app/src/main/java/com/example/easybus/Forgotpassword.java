@@ -80,7 +80,7 @@ public class Forgotpassword extends AppCompatActivity {
                         Toast.makeText(Forgotpassword.this, "輸入email", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     } else {
-                        stringRequest = new StringRequest(Request.Method.POST, "http://192.168.0.114/mysql/forgot.php", new Response.Listener<String>() {
+                        stringRequest = new StringRequest(Request.Method.POST, "http://192.168.0.132/mysql/forgot.php", new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
