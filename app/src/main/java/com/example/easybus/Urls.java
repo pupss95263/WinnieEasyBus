@@ -17,11 +17,11 @@ public class Urls {
         }
 
          url1 = "http://";
-         url2 = "172.20.10.5";
+         url2 = "10.0.8.137";
          url3 = "/mysql/";
 
 
     }
     static String ROOT_URL = url1+url2+url3;
-    static String FORGOT_PASSWORD_URL = "http://192.168.27.107/LoginRegister/" + "forgot.php";
+    static String FORGOT_PASSWORD_URL = "http://10.0.8.137/mysql/" + "forgot.php";
 }

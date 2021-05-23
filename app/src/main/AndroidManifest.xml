@@ -26,6 +26,7 @@
             tools:ignore="Instantiatable"></activity>
         <activity android:name=".AddFamMember" />
         <activity android:name=".edit" />
+        <activity android:name=".Forgotpassword" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".Page801Activity" />
         <activity android:name=".Page7falseActivity" />

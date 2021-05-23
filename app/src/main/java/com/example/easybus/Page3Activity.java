@@ -4,14 +4,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.telecom.Call;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+
 
 public class Page3Activity extends AppCompatActivity {
     com.example.easybus.FloatingActionButton f;
@@ -59,9 +63,20 @@ public class Page3Activity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it4 = new Intent(Page3Activity.this,Login2.class);
-                startActivity(it4);
-            }
+
+                SharedPreferences email = getSharedPreferences("email",MODE_PRIVATE);
+                String email2=email.getString("Email","");
+                if(email2 != "") {
+                    Intent it4 = new Intent(Page3Activity.this, Page8Activity.class);
+                    it4.putExtra("email", email2);
+                    startActivity(it4);
+                }else{
+                    Intent it = new Intent(Page3Activity.this,Login2.class);
+                    startActivity(it);
+                }
+
+                }
+
         });
 
         //浮動按鈕撥打給緊急聯絡人
@@ -77,4 +92,5 @@ public class Page3Activity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -24,7 +24,6 @@
         android:id="@+id/EnteredName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="蔡念婷"
         android:textColor="#131212"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,17 +72,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.434" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/backicon"
-        android:layout_width="44dp"
-        android:layout_height="49dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05"
-        app:srcCompat="@drawable/backicon" />
+        app:srcCompat="@drawable/back" />
 
     <ImageView
         android:id="@+id/editpen"
@@ -108,31 +108,51 @@
         app:srcCompat="@drawable/gggground" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView"
         android:layout_width="342dp"
         android:layout_height="55dp"
-        android:layout_marginTop="118dp"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:text="0912345678"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/background" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="342dp"
         android:layout_height="55dp"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="修改密碼"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/myphone" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/myphone"
         android:layout_width="342dp"
         android:layout_height="55dp"
-        android:text="TextView"
+        android:layout_marginTop="118dp"
+        android:drawableLeft="@drawable/phone1"
+        android:gravity="center"
+        android:text="09123456789"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/background" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="112dp"
+        android:layout_height="62dp"
+        android:layout_marginBottom="64dp"
+        android:text="登出"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

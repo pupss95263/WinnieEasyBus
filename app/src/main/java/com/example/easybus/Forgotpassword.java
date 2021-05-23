@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +53,7 @@ public class Forgotpassword extends AppCompatActivity {
         actionBar.hide();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         mEmail = findViewById(R.id.Email);
-        mForgotPassword = findViewById(R.id.RegisterBtn);
+        mForgotPassword = findViewById(R.id.forgotpassword);
 
 
         progressDialog = new ProgressDialog(this);
@@ -76,7 +80,7 @@ public class Forgotpassword extends AppCompatActivity {
                         Toast.makeText(Forgotpassword.this, "輸入email", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     } else {
-                        stringRequest = new StringRequest(Request.Method.POST, "http://www1.pu.edu.tw/~s1070321/mysql/resetpasswordform.php", new Response.Listener<String>() {
+                        stringRequest = new StringRequest(Request.Method.POST, "http://192.168.0.114/mysql/forgot.php", new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
